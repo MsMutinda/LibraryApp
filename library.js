@@ -35,7 +35,7 @@ class UI {
 
     static addBookToList(book) {
         //get list from the DOM
-        let list = document.querySelector('#book-list');
+        const list = document.querySelector('#book-list');
 
         //Create a DOM table row element for the added books 
         const row = document.createElement('tr');
@@ -48,6 +48,13 @@ class UI {
 
         //append created row to the book list
         list.appendChild(row);
+    }
+
+    //to clear fields after submit
+    static clearFields() {
+        document.querySelector('#title').value = "";
+        document.querySelector('#author').value = "";
+        document.querySelector('#isbn').value = "";
     }
 }
 
@@ -72,9 +79,16 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {     //a
     const title = document.querySelector('#title').value;
     const author = document.querySelector('#author').value;
     const isbn = document.querySelector('#isbn').value;
-});
+
     //instantiate book
-    const book = new book(title, author, isbn);
-    console.log(book);
+    const book = book(title, author, isbn);
+    
+    //add book to UI
+    UI.addBookToList(book); 
+
+    //clear fields after submit
+    UI.clearFields();
+    
+});
 
 //Book removal event
